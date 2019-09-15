@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="/img/map-marker.png" type="image/x-icon" />
+        <meta charset="utf-8">
+<!--        Notice the order the libraries where included... i did these coz bootsrap depended on them so the must be called before loading the bootstrap-->
+        <meta name="viewport" content = "witdth= device-width, initial-scale= 1">
+        <script src="jquery-3.2.1.min.js">
+            
+        </script>
+        <script src="popper.min.js"></script>
+        
+        <script src="bootstrap.min.js">
+        
+        </script>
+        <link rel="stylesheet" href="bootstrap.min.css">
+       
+        <title>
+            Design Page
+        </title>
+        <style>
+            body
+            {
+                background-color:darkgoldenrod;
+            }
+            .loadingCircle
+            {
+                display:inline;
+                margin-right: 15px;
+                float:left;
+                width: 20px;
+                height: 20px;
+                border-radius: 30px;
+                border: 20px solid gray;
+                border-top-color: blueviolet;
+                animation: loading 2s linear infinite
+                
+            }
+            .loadingCircle2
+            {
+                float:left;
+                width: 20px;
+                margin-right: 15px;
+                height: 20px;
+                border-radius: 30px;
+                border: 20px solid yellow;
+                border-top-color: green;
+                animation: loading 2s linear infinite;
+                
+                
+            }
+            .loadingCircle3
+            {
+                float:left;
+                width: 20px;
+                height: 20px;
+                margin-right: 15px;
+                border-radius: 30px;
+                border: 20px solid black;
+                border-top-color:crimson;
+                animation: loading 2s linear infinite;
+               
+                
+                
+            }
+            .flipOver
+            {
+                float:left;
+                
+                background-color: deeppink;
+                width:60px;
+                height: 70px;
+                text-align:center;
+                font-size: 25px;
+                padding: 30px;
+                color:white;
+                
+               
+            }
+            .flipOver:hover
+            {
+                transition: transform 0.2s;
+                animation: flip 0.3s 1 linear;
+            }
+            .dropDown 
+            {
+                
+                position: absolute;
+                top:-300px;
+                background-color: darkslategray;
+                width:400px;
+                height:200px;
+                animation: dropDown 2s forwards;
+                box-shadow: 0px 0px 30px black;
+                border-radius: 10px;
+                
+            }
+            .minimize
+            {
+                display: inline;
+                float:left;
+                margin-left: 340px;
+                margin-top: 0px;
+                color:white;
+                line-height: 11px;
+                background-color: darkslategray;
+            }
+            .maximize
+            {
+                float: left;
+                margin-top:5px;
+                margin-left: 10px;
+                width: 8px;
+                font-size:14px;
+                height: 8px;
+                border: 1px solid white;
+                
+    
+            }
+            .cancel
+            {
+                float:left;
+                width: 5px;
+                height: 8px;
+                margin-left: 10px;
+                font-size: 19px;
+                text-transform:capitalize;
+                color:white;
+                font-family:monospace;              
+            }
+            div Button
+            {
+                border-radius: 5px;
+                background-color: cyan;
+                border:0px;
+                width: 50px;
+                margin-top: 80px;
+                font-family: sans-serif;
+                font-size:15px;
+                color:darkslategray;
+                font-weight: bold;
+                
+                
+            }
+          
+            Button[class="button"]:hover
+            {
+                transition: 0.8s;
+                cursor: pointer;
+                background-color:black;
+                color:white;
+            }
+            Button[id="leftButton"]
+            {
+                margin-left: 200px;
+            }
+            label[id="text"]
+            {
+                color:cornflowerblue;
+                margin-left: 30px;
+                
+            }
+            .minimize:hover
+            {
+                color:yellow;
+                cursor: pointer;
+                
+            }
+            .maximize:hover
+            {
+                color:yellow;
+                border-color:yellow;
+                cursor: pointer;
+            }
+            .cancel:hover
+            {
+                color:red;
+                cursor:pointer;
+            }
+            .slide
+            {
+                position: absolute;
+                top:80px;
+                background-color:crimson;
+                border-radius:12px;
+                height: 19px;
+                border:0px;
+                box-shadow: 0px 0px 2px black;
+                
+            }
+            div[id="slider"]
+            {
+                position:absolute;
+                top:2px;
+                left:2px;
+                background-color:white;
+                width:14px;
+                height:14px;
+                border-radius: 7px;
+                
+            }
+            input[id="on"],input[id="off"]
+            {
+                height: 12px
+            }
+            p[id="onOrOff"]
+            {
+                position: absolute;
+                top:90px;
+                margin-left: 8px;
+                font-size: 12px;
+                font-weight: bold;
+                
+                
+                
+            }
+            .rightSlide
+            {
+                position: absolute;
+                background-color: black;
+                opacity:0.9;                
+                width: 400px;
+                height: 600px;
+                margin-left:99%; 
+                z-index:2;
+                border-radius: 3px;
+                
+                
+                
+            }
+            .rightSlide:hover
+            {
+                background-color:hsla(30deg,40,100,0.1);
+                transition: 0.4s;
+                animation: slideRight 1s forwards; 
+                box-shadow: 0px 0px 44px darkgray;
+            }
+            .courses
+            {
+                list-style-type: circle;
+                color:white;
+                font-size: 14px;
+                font-family: sans-serif;
+                cursor: pointer;
+                
+            }
+            .coursesText
+            {
+                color:greenyellow;
+                font-weight: bold;
+                margin-left: 5px;
+                border:0px;
+            }
+            hr
+            {
+                opacity: 0.2;
+            }
+            
+            @keyframes loading { 100%{transform: rotatez(720deg);}}
+            
+            @keyframes flip{100%{transform: rotatey(90deg);}}
+            
+            @keyframes dropDown{0%{transform: scale(0.5)}  100%{transform: translateY(600px);}}
+            
+            @keyframes slideRight{100%{margin-left: 85%;}}
+
+        </style>
+    </head>
+    
+    <body>
+        <div class="container">
+                <div class="loadingCircle"></div>  
+        <div class="loadingCircle2"></div>
+        <div class="loadingCircle3"></div>
+        <div class="flipOver">Front</div>
+        <div class="slide">
+            <input type="radio" name = "bool" id="off"/>
+            <input type="radio" name = "bool" id="on"/>
+            <div id="slider"></div>
+           
+        </div>
+        <div class="rightSlide">
+            <span class="coursesText">Courses</span>
+            <ul class="courses">
+            <li>Python Programming</li>
+            <hr/>
+            <li>Java Programming</li>
+            <hr />
+            <li>Angular Js</li>
+            </ul>
+        </div>
+         <p id="onOrOff">Light</p>
+        <div class="dropDown" id="drop" >
+            <div class="minimize">&#95;</div>
+            <div class="maximize"></div>
+            <div class="cancel">&times;</div>
+            <br />
+            <hr />
+            <label id="text">
+                Do you want to proceed?
+            </label>
+            <br />
+            <div id="buttons">
+                <Button class="button" id="leftButton">Yes</Button>
+                <Button class="button" id="rightButton">No</Button>
+            </div>
+        </div>
+        
+        </div>
+        
+        
+        <script>
+            var cancel= document.getElementsByClassName("cancel");
+            
+            cancel[0].addEventListener("click",function(){
+                document.getElementById("drop").style.visibility=" hidden";});
+            
+            function switchOn()
+            {
+                 document.getElementById("slider").style="margin-left:27px; transition: 0.7s";
+                document.getElementsByClassName("slide")[0].style.backgroundColor="crimson";
+                document.getElementById("onOrOff").innerHTML = "Light On";
+                document.getElementById("onOrOff").style.color = "yellow";
+            }
+             function switchOff()
+            {
+                 document.getElementById("slider").style="margin-left:0px; transition: 0.7s;";
+                document.getElementsByClassName("slide")[0].style.backgroundColor="gray";
+                document.getElementById("onOrOff").innerHTML = "Light Off";
+                document.getElementById("onOrOff").style.color = "white";
+            }
+            
+            
+            var switches = document.getElementsByName("bool");
+            
+            
+            switches[1].addEventListener("click",switchOn);
+            switches[0].addEventListener("click",switchOff);
+         
+        </script>
+    </body>
+</html>
